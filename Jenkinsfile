@@ -18,8 +18,8 @@ pipeline {
                         copy /Y "%PRIVATE_KEY%" "%TEMP%\\ec2_key.pem" >nul
                         icacls "%TEMP%\\ec2_key.pem" /c /inheritance:r /grant:r *S-1-5-32-544:(F) *S-1-5-18:(F)
                         
-                        :: Notice we changed 'git checkout deploy' to pull directly into your current active branch
-                        ssh -i "%TEMP%\\ec2_key.pem" -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_IP} "cd ~/protostruct3 && git fetch --all && git pull origin main && sudo docker compose down && sudo docker compose up --build -d"
+                        :: Force reset git on EC2, clear uncommitted files, pull the correct config, and build
+                        ssh -i "%TEMP%\\ec2_key.pem" -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_IP} "cd ~/protostruct3 && git fetch --all && git reset --hard origin/main && git clean -fd && sudo docker compose down && sudo docker compose up --build -d"
                         
                         del "%TEMP%\\ec2_key.pem"
                     """
