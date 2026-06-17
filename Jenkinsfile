@@ -2,25 +2,21 @@ pipeline {
     agent any
 
     environment {
-        // Your EC2 instance public IP address
         EC2_IP          = '16.16.242.152'
         EC2_USER        = 'ubuntu'
-        
-        // The ID of your private SSH key (.pem) saved inside Jenkins Credentials
-        SSH_CREDENTIALS_ID = 'ec2-ssh-key' 
+        // The ID of your SSH Key credential in Jenkins
+        SSH_KEY_ID      = 'ec2-ssh-key' 
     }
 
     stages {
         stage('Deploy & Build on EC2') {
             steps {
-                // Securely fetches your .pem key from Jenkins credentials manager
-                sshagent(credentials: ["${SSH_CREDENTIALS_ID}"]) {
-                    
-                    echo "Connecting to EC2 instance to fetch latest code and build..."
-                    
-                    // 1. SSH into EC2, go to project folder, pull latest code, and restart containers
+                echo "Connecting to EC2 instance to fetch latest code and build..."
+                
+                // Securely binds your private key file to a temporary file path variable ($PRIVATE_KEY)
+                withCredentials([file(credentialsId: "${SSH_KEY_ID}", variable: 'PRIVATE_KEY')]) {
                     bat """
-                        ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_IP} "
+                        ssh -i "%PRIVATE_KEY%" -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_IP} "
                             cd ~/protostruct3 && \
                             git checkout deploy && \
                             git pull origin deploy && \
