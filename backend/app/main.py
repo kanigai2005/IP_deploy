@@ -15,6 +15,7 @@ app.add_middleware(
     allow_origins=[
         FRONTEND_URL,
         "http://localhost:3000",
+        "http://16.16.242.152:3000",  # ADD YOUR EC2 FRONTEND HERE
     ],
     # This regex allows all Vercel preview/production domains
     allow_origin_regex="https://.*\\.vercel\\.app",
@@ -28,5 +29,6 @@ def health_check():
     return {"status": "ok"}
 
 # Modular router registration
-app.include_router(auth_router, prefix="/api/auth", tags=["Authentication"])
+# Change prefix to "/auth" if your frontend strictly hits /auth/register
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
 app.include_router(api_router, prefix="/api")
