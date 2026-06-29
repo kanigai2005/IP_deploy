@@ -8,9 +8,10 @@ services:
       - /home/ubuntu/env_config/protostruct3.env
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        - NEXT_PUBLIC_API_URL=http://16.16.242.152:8000
     ports:
       - "3000:3000"
     restart: always
-    environment:
-      - NEXT_PUBLIC_API_URL=http://16.16.242.152:8000
