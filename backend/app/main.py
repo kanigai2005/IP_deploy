@@ -31,4 +31,4 @@ def health_check():
 # Modular router registration
 # Change prefix to "/auth" if your frontend strictly hits /auth/register
 app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
-app.include_router(api_router, prefix="/api")
+app.include_router(api_router)
