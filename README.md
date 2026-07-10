@@ -1,62 +1,190 @@
 # ProtoStruc: Professional Engineering Design Platform
 
-ProtoStruc is an enterprise-grade, AI-assisted product development ecosystem designed to streamline and automate hardware and software engineering methodologies. By leveraging cutting-edge multi-agent systems via LangGraph, ProtoStruc handles **Functional Decomposition**, **Morphological Analysis**, and **Risk Mitigation** directly inside a clean, comprehensive dashboard.
+ProtoStruc is an enterprise-grade, AI-assisted product development ecosystem designed to streamline and automate hardware and software engineering methodologies. By leveraging cutting-edge multi-agent systems via LangGraph, ProtoStruc performs Functional Decomposition, Morphological Analysis, and Risk Mitigation through an intuitive engineering dashboard.
 
 ---
 
-## ⚡ Tech Stack Overview
+## 🌐 Live Application
 
-### Frontend
-- **Framework**: Next.js (App Router)
-- **Styling**: Tailwind CSS + shadcn/ui components
-- **Icons**: Lucide React
-- **Animations**: Framer Motion
+- **Frontend:** https://http://16.16.242.152:3000
+- **Backend API:** http://http://16.16.242.152:8000
+---
 
-### Backend
-- **Core API**: FastAPI (Python)
-- **AI Orchestration**: LangGraph
-- **LLM Capabilities**: Groq API (`llama-3.3-70b-versatile`)
-- **Database / Auth**: Supabase (PostgreSQL)
+# 🚀 Features
+
+- AI-assisted engineering workflow automation
+- Functional Decomposition
+- Morphological Analysis
+- Engineering Risk Mitigation
+- Multi-agent orchestration using LangGraph
+- Secure JWT Authentication
+- Supabase integration
+- Responsive Next.js dashboard
+- Automated CI/CD deployment using Jenkins
+- Dockerized production environment
+- AWS EC2 deployment
 
 ---
 
-## 📂 Repository Structure
+# ⚡ Technology Stack
 
-The architecture is divided into two highly modular environments.
+## Frontend
+
+- Next.js (App Router)
+- React
+- Tailwind CSS
+- shadcn/ui
+- Lucide React
+- Framer Motion
+
+## Backend
+
+- FastAPI
+- Python
+- LangGraph
+- Groq API
+- Pydantic
+- Supabase (PostgreSQL)
+
+## DevOps
+
+- Docker
+- Docker Compose
+- Jenkins
+- AWS EC2
+- GitHub
+
+---
+
+# 📁 Repository Structure
 
 ```text
 IP_Deployment/
-├── frontend/                 # Next.js Presentation Layer
-│   ├── src/app/              # Dedicated routing (Login, Projects, Resets)
-│   ├── src/components/       # Reusable React & Sidebar modules
-│   └── src/lib/              # Standard frontend SDK and Hooks
-├── backend/                  # FastAPI & AI Engine
-│   ├── app/ai/               # LangGraph multi-agent logic
-│   ├── app/api/              # JWT-secured network handlers
-│   └── app/models/           # Pydantic schemas and database bindings
-├── ARCHITECTURE.md           # Technical blueprint for the multi-agent AI flow
-└── DEPLOYMENT.md             # Standard Operating Procedures for Vercel & Render
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── components/
+│   │   └── lib/
+│   ├── Dockerfile
+│   └── package.json
+│
+├── backend/
+│   ├── app/
+│   │   ├── ai/
+│   │   ├── api/
+│   │   ├── models/
+│   │   └── main.py
+│   ├── Dockerfile
+│   └── requirements.txt
+│
+├── docker-compose.prod.yml
+├── Jenkinsfile
+├── ARCHITECTURE.md
+├── DEPLOYMENT.md
+└── README.md
 ```
 
-## 🚀 Getting Started
+---
 
-### 1. Database Setup
-Ensure you have a connected Supabase cluster with the appropriate `users`, `password_resets`, and relational tables provisioned.
+# 🛠 Local Development
 
-### 2. Run Backend (Local)
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/kanigai2005/ProtoStruc.git
+
+cd ProtoStruc
+```
+
+---
+
+## 2. Backend Setup
+
 ```bash
 cd backend
+
 python -m venv venv
-.\venv\Scripts\activate   # Windows
+
+# Windows
+venv\Scripts\activate
+
+# Linux/macOS
+source venv/bin/activate
+
 pip install -r requirements.txt
+
 uvicorn app.main:app --reload
 ```
 
-### 3. Run Frontend (Local)
+Backend runs on
+
+```
+http://localhost:8000
+```
+
+Swagger UI
+
+```
+http://localhost:8000/docs
+```
+
+---
+
+## 3. Frontend Setup
+
 ```bash
 cd frontend
+
 npm install
+
 npm run dev
 ```
 
-For extended details into how the system logic parses information, refer to `ARCHITECTURE.md`. For live hosting mechanics, reference `DEPLOYMENT.md`.
+Frontend runs on
+
+```
+http://localhost:3000
+```
+
+---
+
+# 🐳 Running with Docker
+
+Build and start both frontend and backend containers:
+
+```bash
+docker compose -f docker-compose.yml up --build
+```
+
+Run in detached mode
+
+```bash
+docker compose -f docker-compose.yml up --build -d
+```
+
+Stop containers
+
+```bash
+docker compose -f docker-compose.yml down
+```
+
+---
+
+# ☁️ Production Deployment
+
+ProtoStruc is deployed on an AWS EC2 instance using Docker containers and an automated Jenkins CI/CD pipeline.
+
+The deployment pipeline performs:
+
+- Repository checkout
+- Docker image build
+- Container deployment
+- Automatic application restart
+- Removal of unused Docker images
+- Continuous deployment on every push to the main branch
+
+
+# 👨‍💻 Author
+
+Developed as an AI-assisted engineering platform demonstrating modern software architecture, multi-agent AI orchestration, containerized deployment, and automated CI/CD practices.
