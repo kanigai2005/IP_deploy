@@ -92,7 +92,7 @@ IP_Deployment/
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/kanigai2005/ProtoStruc.git
+git clone https://github.com/kanigai2005/IP_deploy.git
 
 cd ProtoStruc
 ```
